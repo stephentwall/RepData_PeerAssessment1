@@ -69,7 +69,8 @@ for(i in 1:nrow(imputeddata)){
 }
 
 sumimputeddata <- imputeddata %>% group_by(date) %>% summarise(total = sum(steps))
-hist(sumimputeddata$total, breaks=10, main="histogram of total steps per day (imputed)", xlab="total steps", ylab="frequency")
+hist(sumimputeddata$total, breaks=10, main="histogram of total steps per day (imputed)", 
+     xlab="total steps", ylab="frequency")
 summary(sumimputeddata)
 ```
 When replacing NA values with the interval average across all days, the mean and median of the imputed dataset is not different than what was originally calulated. (Compare both histograms, and dataframe summaries).
@@ -80,7 +81,8 @@ Create Vector of weekdays for the summed imputed data, Factor the week days as e
 ```{r}
 imputeddatadays <- weekdays(as.Date(imputeddata$date))
 imputeddatawithdays <- cbind(imputeddata,imputeddatadays)
-dayclassification <- ifelse(weekdays(as.Date(imputeddatawithdays$date)) %in% c('Saturday','Sunday'), "weekend", "weekday")
+dayclassification <- ifelse(weekdays(as.Date(imputeddatawithdays$date)) 
+                            %in% c('Saturday','Sunday'), "weekend", "weekday")
 imputeddatawithdays <- cbind(imputeddatawithdays[,c(-4)],dayclassification)
 
 

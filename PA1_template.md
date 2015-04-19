@@ -102,7 +102,8 @@ for(i in 1:nrow(imputeddata)){
 }
 
 sumimputeddata <- imputeddata %>% group_by(date) %>% summarise(total = sum(steps))
-hist(sumimputeddata$total, breaks=10, main="histogram of total steps per day (imputed)", xlab="total steps", ylab="frequency")
+hist(sumimputeddata$total, breaks=10, main="histogram of total steps per day (imputed)", 
+     xlab="total steps", ylab="frequency")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-8-1.png) 
@@ -130,7 +131,8 @@ Create Vector of weekdays for the summed imputed data, Factor the week days as e
 ```r
 imputeddatadays <- weekdays(as.Date(imputeddata$date))
 imputeddatawithdays <- cbind(imputeddata,imputeddatadays)
-dayclassification <- ifelse(weekdays(as.Date(imputeddatawithdays$date)) %in% c('Saturday','Sunday'), "weekend", "weekday")
+dayclassification <- ifelse(weekdays(as.Date(imputeddatawithdays$date)) 
+                            %in% c('Saturday','Sunday'), "weekend", "weekday")
 imputeddatawithdays <- cbind(imputeddatawithdays[,c(-4)],dayclassification)
 
 
